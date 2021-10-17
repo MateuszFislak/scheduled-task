@@ -1,4 +1,4 @@
-package com.interview.crealogix.cryptostats.model;
+package com.interview.crealogix.cryptostats.cryptosorter;
 
 public enum CryptoSortField {
     MARKET_CAP("Market Cap"), PRICE("Price"), VOLUME_24H("Volume(24h)");

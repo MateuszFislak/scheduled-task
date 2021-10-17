@@ -1,8 +1,6 @@
 package com.interview.crealogix.cryptostats.coinmarketclient;
 
 import com.interview.crealogix.cryptostats.model.Crypto;
-import com.interview.crealogix.cryptostats.model.CryptoSortField;
-import com.interview.crealogix.cryptostats.model.CryptoSortOrder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -28,14 +26,12 @@ public class CoinMarketClient {
         this.responseFormatter = responseFormatter;
     }
 
-    public List<Crypto> getCryptoCurrencies(CryptoSortField sortField, CryptoSortOrder cryptoSortOrder) {
+    public List<Crypto> getCryptoCurrencies() {
         return webClient.get()
                 .uri(currencyUrl, uriBuilder -> uriBuilder
                         .queryParam("start", 1)
-                        .queryParam("limit", 10)
+                        .queryParam("limit", 100)
                         .queryParam("convert", "USD")
-                        .queryParam("sort", sortField.name().toLowerCase())
-                        .queryParam("sort_dir", cryptoSortOrder.name().toLowerCase())
                         .build()
                 )
                 .header(AUTHENTICATION_HEADER, apiKey)

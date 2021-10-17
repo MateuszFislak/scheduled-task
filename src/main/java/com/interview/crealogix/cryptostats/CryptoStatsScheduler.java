@@ -1,7 +1,7 @@
 package com.interview.crealogix.cryptostats;
 
-import com.interview.crealogix.cryptostats.model.CryptoSortField;
-import com.interview.crealogix.cryptostats.model.CryptoSortOrder;
+import com.interview.crealogix.cryptostats.cryptosorter.CryptoSortField;
+import com.interview.crealogix.cryptostats.cryptosorter.CryptoSortOrder;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,6 @@ public class CryptoStatsScheduler {
 
     @Scheduled(fixedDelayString = "${stats.refresh.interval.seconds}", timeUnit = TimeUnit.SECONDS)
     public void scheduleCryptoStatsRefresh() {
-        statsPrinter.printCryptoStats(CryptoSortField.MARKET_CAP, CryptoSortOrder.DESC);
+        statsPrinter.printCryptoStats(CryptoSortField.PRICE, CryptoSortOrder.DESC);
     }
 }
