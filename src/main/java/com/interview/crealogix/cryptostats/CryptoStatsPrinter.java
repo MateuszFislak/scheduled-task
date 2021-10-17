@@ -23,13 +23,30 @@ public class CryptoStatsPrinter {
     }
 
     public void printCryptoStats(CryptoSortField sortField, CryptoSortOrder sortOrder) {
-        final List<Crypto> cryptos = coinMarketClient.getCryptoCurrencies(sortField, sortOrder);
-        logger.info(String.format("\n### Crypto Currencies List, Sorting: %s with Order: %s ###", sortField, sortOrder));
+        try {
+            final List<Crypto> cryptos = coinMarketClient.getCryptoCurrencies(sortField, sortOrder);
+            printHeader(sortField, sortOrder);
+            printStatistics(cryptos);
+        } catch (Exception e) {
+            printError();
+        }
+    }
+
+    private void printError() {
+        System.out.println("\n\n");
+        logger.error("! Could not fetch crypto currency list !");
+    }
+
+    private void printStatistics(List<Crypto> cryptos) {
         cryptos.forEach(crypto -> {
             final Quote quote = crypto.getQuote();
-            logger.info(String.format("%s | Price: %s | Volume(24h): %s | Market Cap: %s", crypto.getName(), quote.getPrice(), quote.getVolume24h(), quote.getMarketCap()));
+            logger.info(String.format("%s >> Price: %s | Volume(24h): %s | Market Cap: %s", crypto.getName(), quote.getPrice(), quote.getVolume24h(), quote.getMarketCap()));
         });
+    }
 
+    private void printHeader(CryptoSortField sortField, CryptoSortOrder sortOrder) {
+        System.out.println("\n\n");
+        logger.info(String.format("### Crypto Currencies List, Sorting: %s with Order: %s ###", sortField, sortOrder));
     }
 
 
