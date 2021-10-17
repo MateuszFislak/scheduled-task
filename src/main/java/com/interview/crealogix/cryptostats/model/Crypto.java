@@ -1,11 +1,15 @@
 package com.interview.crealogix.cryptostats.model;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Crypto {
     private String name;
     private String symbol;
