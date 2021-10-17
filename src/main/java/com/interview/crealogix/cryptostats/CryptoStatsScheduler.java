@@ -10,15 +10,15 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class CryptoStatsScheduler {
 
-    private final CryptoStatsPrinter cryptoStatsService;
+    private final CryptoStatsPrinter statsPrinter;
 
-    public CryptoStatsScheduler(CryptoStatsPrinter cryptoStatsService) {
-        this.cryptoStatsService = cryptoStatsService;
+    public CryptoStatsScheduler(CryptoStatsPrinter statsPrinter) {
+        this.statsPrinter = statsPrinter;
     }
 
 
-    @Scheduled(fixedDelayString = "${query.interval.seconds}", timeUnit = TimeUnit.SECONDS)
-    public void readCryptos() {
-        cryptoStatsService.printCryptoStats(CryptoSortField.MARKET_CAP, CryptoSortOrder.DESC);
+    @Scheduled(fixedDelayString = "${stats.refresh.interval.seconds}", timeUnit = TimeUnit.SECONDS)
+    public void scheduleCryptoStatsRefresh() {
+        statsPrinter.printCryptoStats(CryptoSortField.MARKET_CAP, CryptoSortOrder.DESC);
     }
 }

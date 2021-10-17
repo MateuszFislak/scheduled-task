@@ -25,6 +25,7 @@ public class CryptoStatsPrinter {
     public void printCryptoStats(CryptoSortField sortField, CryptoSortOrder sortOrder) {
         try {
             final List<Crypto> cryptos = coinMarketClient.getCryptoCurrencies(sortField, sortOrder);
+
             printHeader(sortField, sortOrder);
             printStatistics(cryptos);
         } catch (Exception e) {
