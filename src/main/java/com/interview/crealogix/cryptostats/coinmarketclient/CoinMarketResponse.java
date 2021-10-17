@@ -7,13 +7,13 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class CoinMarketResponse {
-    private Status status;
-    private List<Crypto> data;
+class CoinMarketResponse {
+    private StatusResponse statusResponse;
+    private List<CryptoResponse> data;
 }
 
 @Data
-class Status {
+class StatusResponse {
     private Date timestamp;
     private int error_code;
     private Object error_message;
@@ -24,7 +24,7 @@ class Status {
 }
 
 @Data
-class USD {
+class CurrencyResponse {
     private double price;
     @JsonProperty("volume_24h")
     private double volume24h;
@@ -33,15 +33,15 @@ class USD {
 }
 
 @Data
-class Quote {
+class QuoteResponse {
     @JsonProperty("USD")
-    private USD uSD;
+    private CurrencyResponse uSD;
 }
 
 @Data
-class Crypto {
+class CryptoResponse {
     private String name;
     private String symbol;
-    private Quote quote;
+    private QuoteResponse quote;
 }
 

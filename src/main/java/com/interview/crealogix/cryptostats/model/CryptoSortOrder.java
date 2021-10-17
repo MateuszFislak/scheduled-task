@@ -1,4 +1,4 @@
-package com.interview.crealogix.cryptostats;
+package com.interview.crealogix.cryptostats.model;
 
 public enum CryptoSortOrder {
     ASC,

@@ -1,5 +1,7 @@
 package com.interview.crealogix.cryptostats;
 
+import com.interview.crealogix.cryptostats.model.CryptoSortField;
+import com.interview.crealogix.cryptostats.model.CryptoSortOrder;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
