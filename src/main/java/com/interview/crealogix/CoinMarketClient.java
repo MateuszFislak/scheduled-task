@@ -15,7 +15,7 @@ public class CoinMarketClient {
     private final WebClient webClient;
 
     public CoinMarketClient(@Value("${api.key}") String apiKey,
-                            @Value("${coinmarketcap.cryptocurrency.url}") String currencyUrl,
+                            @Value("${coinmarket.cryptocurrency.url}") String currencyUrl,
                             WebClient webClient) {
         this.apiKey = apiKey;
         this.currencyUrl = currencyUrl;
