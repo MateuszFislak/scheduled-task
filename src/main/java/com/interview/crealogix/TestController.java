@@ -1,23 +1,26 @@
 package com.interview.crealogix;
 
+import com.interview.crealogix.cryptostats.coinmarketclient.CoinMarketResponse;
+import com.interview.crealogix.cryptostats.CryptoSortField;
+import com.interview.crealogix.cryptostats.CryptoSortOrder;
+import com.interview.crealogix.cryptostats.CryptoStatsPrinter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Optional;
-
 @Controller
 public class TestController {
 
-    private final CoinMarketClient coinMarketCapClient;
+    private final CryptoStatsPrinter cryptoStatsPrinter;
 
-    public TestController(CoinMarketClient coinMarketCapClient) {
-        this.coinMarketCapClient = coinMarketCapClient;
+    public TestController(CryptoStatsPrinter cryptoStatsPrinter) {
+        this.cryptoStatsPrinter = cryptoStatsPrinter;
     }
 
+
     @GetMapping
-    public ResponseEntity<CainMarketResponse> getCryptos() {
-        final CainMarketResponse response = coinMarketCapClient.getCurrencies(Optional.of(1), Optional.of(100), Optional.of("USD"));
-        return ResponseEntity.ok(response);
+    public ResponseEntity<CoinMarketResponse> getCryptos() {
+        cryptoStatsPrinter.printCryptoStats(CryptoSortField.MARKET_CAP, CryptoSortOrder.DESC);
+        return ResponseEntity.ok().build();
     }
 }

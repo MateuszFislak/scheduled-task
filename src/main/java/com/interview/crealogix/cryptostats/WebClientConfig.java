@@ -1,4 +1,4 @@
-package com.interview.crealogix;
+package com.interview.crealogix.cryptostats;
 
 
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 @PropertySource("file:${user.home}/.coinmarketcap/credentials")
-public class AppConfiguration {
+public class WebClientConfig {
 
     @Bean
     public WebClient webClient() {

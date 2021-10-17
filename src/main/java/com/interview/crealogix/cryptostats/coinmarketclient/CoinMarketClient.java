@@ -1,10 +1,10 @@
-package com.interview.crealogix;
+package com.interview.crealogix.cryptostats.coinmarketclient;
 
+import com.interview.crealogix.cryptostats.CryptoSortField;
+import com.interview.crealogix.cryptostats.CryptoSortOrder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.Optional;
 
 @Service
 public class CoinMarketClient {
@@ -14,7 +14,7 @@ public class CoinMarketClient {
     private final String currencyUrl;
     private final WebClient webClient;
 
-    public CoinMarketClient(@Value("${api.key}") String apiKey,
+    public CoinMarketClient(@Value("${coinmarket.api.key}") String apiKey,
                             @Value("${coinmarket.cryptocurrency.url}") String currencyUrl,
                             WebClient webClient) {
         this.apiKey = apiKey;
@@ -22,17 +22,20 @@ public class CoinMarketClient {
         this.webClient = webClient;
     }
 
-    public CainMarketResponse getCurrencies(Optional<Integer> start, Optional<Integer> limit, Optional<String> currency) {
+    public CoinMarketResponse getCryptoCurrencies(CryptoSortField sortField, CryptoSortOrder cryptoSortOrder) {
         return webClient.get()
                 .uri(currencyUrl, uriBuilder -> uriBuilder
-                        .queryParamIfPresent("start", start)
-                        .queryParamIfPresent("limit", limit)
-                        .queryParamIfPresent("convert", currency)
+                        .queryParam("start", 1)
+                        .queryParam("limit", 10)
+                        .queryParam("convert", "USD")
+                        .queryParam("sort", sortField.name().toLowerCase())
+                        .queryParam("sort_dir", cryptoSortOrder.name().toLowerCase())
                         .build()
                 )
                 .header(AUTHENTICATION_HEADER, apiKey)
                 .retrieve()
-                .bodyToMono(CainMarketResponse.class)
+                .bodyToMono(CoinMarketResponse.class)
+                .map(coinMarketResponse -> coinMarketResponse)
                 .block();
     }
 }
