@@ -17,6 +17,6 @@ public class CryptoStatsScheduler {
 
     @Scheduled(fixedDelayString = "${stats.refresh.interval.miliseconds}")
     public void scheduleCryptoStatsRefresh() {
-        statsPrinter.printCryptoStats(CryptoSortField.PRICE, CryptoSortOrder.DESC);
+        statsPrinter.printCryptoStats(CryptoSortField.MARKET_CAP, CryptoSortOrder.DESC);
     }
 }
