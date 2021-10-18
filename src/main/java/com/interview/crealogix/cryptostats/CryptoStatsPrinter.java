@@ -6,7 +6,6 @@ import com.interview.crealogix.cryptostats.model.Crypto;
 import com.interview.crealogix.cryptostats.cryptosorter.CryptoSortField;
 import com.interview.crealogix.cryptostats.cryptosorter.CryptoSortOrder;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +13,13 @@ import java.util.List;
 @Service
 public class CryptoStatsPrinter {
 
-    private final Logger logger = LoggerFactory.getLogger(CryptoStatsPrinter.class);
+    private final Logger logger;
     private final CoinMarketClient coinMarketClient;
     private final CryptoSorter cryptoSorter;
 
 
-    public CryptoStatsPrinter(CoinMarketClient coinMarketClient, CryptoSorter cryptoSorter) {
+    public CryptoStatsPrinter(Logger logger, CoinMarketClient coinMarketClient, CryptoSorter cryptoSorter) {
+        this.logger = logger;
         this.coinMarketClient = coinMarketClient;
         this.cryptoSorter = cryptoSorter;
     }
