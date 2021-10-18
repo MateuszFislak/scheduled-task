@@ -31,19 +31,19 @@ public class CryptoStatsPrinter {
             printHeader(sortField, sortOrder);
             printStatistics(sorted);
         } catch (Exception e) {
-            printError();
+            printError(e);
         }
     }
 
-    private void printError() {
+    private void printError(Exception e) {
         System.out.println("\n\n");
-        logger.error("! Could not fetch crypto currency list !");
+        logger.error("! Could not fetch crypto currency list !", e);
     }
 
     private void printStatistics(List<Crypto> cryptos) {
         cryptos.stream()
                 .map(crypto -> String.format("%s >> Price: %s | Volume(24h): %s | Market Cap: %s", crypto.getName(), crypto.getPrice(), crypto.getVolume24h(), crypto.getMarketCap()))
-                .forEach(System.out::println);
+                .forEach(logger::info);
     }
 
     private void printHeader(CryptoSortField sortField, CryptoSortOrder sortOrder) {

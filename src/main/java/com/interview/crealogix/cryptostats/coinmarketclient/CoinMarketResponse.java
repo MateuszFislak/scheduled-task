@@ -8,40 +8,48 @@ import java.util.List;
 
 @Data
 class CoinMarketResponse {
-    private StatusResponse statusResponse;
-    private List<CryptoResponse> data;
+    private Status statusResponse;
+    private List<Crypto> data;
+
+    @Data
+   static class Status {
+        private Date timestamp;
+        private int error_code;
+        private Object error_message;
+        private int elapsed;
+        private int credit_count;
+        private Object notice;
+        private int total_count;
+    }
+
+    @Data
+    static class Currency {
+        private double price;
+        @JsonProperty("volume_24h")
+        private double volume24h;
+        @JsonProperty("market_cap")
+        private double marketCap;
+    }
+
+
+    @Data
+    static class Quote {
+        @JsonProperty("USD")
+        private Currency uSD;
+    }
+
+    @Data
+    static class Crypto {
+        private String name;
+        private String symbol;
+        private Quote quote;
+    }
 }
 
-@Data
-class StatusResponse {
-    private Date timestamp;
-    private int error_code;
-    private Object error_message;
-    private int elapsed;
-    private int credit_count;
-    private Object notice;
-    private int total_count;
-}
 
-@Data
-class CurrencyResponse {
-    private double price;
-    @JsonProperty("volume_24h")
-    private double volume24h;
-    @JsonProperty("market_cap")
-    private double marketCap;
-}
 
-@Data
-class QuoteResponse {
-    @JsonProperty("USD")
-    private CurrencyResponse uSD;
-}
 
-@Data
-class CryptoResponse {
-    private String name;
-    private String symbol;
-    private QuoteResponse quote;
-}
+
+
+
 

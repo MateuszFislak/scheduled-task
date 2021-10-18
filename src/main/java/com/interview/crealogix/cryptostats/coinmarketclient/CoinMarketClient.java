@@ -14,12 +14,12 @@ public class CoinMarketClient {
     private final String apiKey;
     private final String currencyUrl;
     private final WebClient webClient;
-    private final ResponseFormatter responseFormatter;
+    private final ResponseMapper responseFormatter;
 
     public CoinMarketClient(@Value("${coinmarket.api.key}") String apiKey,
                             @Value("${coinmarket.cryptocurrency.url}") String currencyUrl,
                             WebClient webClient,
-                            ResponseFormatter responseFormatter) {
+                            ResponseMapper responseFormatter) {
         this.apiKey = apiKey;
         this.currencyUrl = currencyUrl;
         this.webClient = webClient;
@@ -37,7 +37,7 @@ public class CoinMarketClient {
                 .header(AUTHENTICATION_HEADER, apiKey)
                 .retrieve()
                 .bodyToMono(CoinMarketResponse.class)
-                .map(responseFormatter::format)
+                .map(responseFormatter::mapToCrypto)
                 .block();
     }
 }
