@@ -1,8 +1,6 @@
 package com.interview.crealogix.cryptostats;
 
 import com.interview.crealogix.cryptostats.coinmarketclient.CoinMarketClient;
-import com.interview.crealogix.cryptostats.cryptosorter.CryptoSortField;
-import com.interview.crealogix.cryptostats.cryptosorter.CryptoSortOrder;
 import com.interview.crealogix.cryptostats.cryptosorter.CryptoSorter;
 import com.interview.crealogix.cryptostats.model.Crypto;
 import com.interview.crealogix.cryptostats.model.Quote;
@@ -10,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 
@@ -53,7 +50,7 @@ class CryptoStatsPrinterTest {
         when(coinMarketClient.getCryptoCurrencies()).thenReturn(new ArrayList<>());
         when(cryptoSorter.sort(new ArrayList<>(), PRICE, DESC, 10)).thenReturn(cryptos);
         cryptoStatsPrinter.printCryptoStats(PRICE, DESC);
-        verify(logger, times(11)).info(anyString());
+        verify(logger, times(1)).info(anyString());
     }
 
     private List<Crypto> createCryptos() {

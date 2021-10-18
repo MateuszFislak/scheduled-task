@@ -33,6 +33,7 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.awaitility:awaitility:3.1.2'
     testImplementation 'org.assertj:assertj-core:3.21.0'
+    testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
 }
 
 dependencyManagement {
